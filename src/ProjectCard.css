@@ -8,6 +8,7 @@
   background-color: #fff;
   margin: 0 30px;
   justify-content: space-between;
+  cursor: pointer;
 }
 
 .ProjectCard img {
@@ -27,4 +28,13 @@
 
 .Card-intro {
   margin: 10px 0;
+}
+
+.Stacks {
+  background-color: #c2c2c2;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 12px;
+  text-align: center;
+  width: 40px;
 }

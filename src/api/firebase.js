@@ -1,5 +1,5 @@
-import { uploadString } from "firebase/storage";
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js";
+import { listAll } from "firebase/storage";
+import { initializeApp } from "firebase/app";
 import {
   getFirestore,
   collection,
@@ -8,11 +8,11 @@ import {
   setDoc,
   addDoc,
   doc,
-  docId,
   deleteDoc,
   updateDoc,
   query,
-} from "https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore.js";
+} from "firebase/firestore";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBm0Lpmq4vBcSUtKU6Q4arM8MkxD-5ciGk",
@@ -25,12 +25,26 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const storage = getStorage(app);
 
 const getProjects = async () => {
   const projectsCol = collection(db, "Project");
   const projectSnapshot = await getDocs(projectsCol);
   const projectList = projectSnapshot.docs.map((doc) => doc.data());
   return projectList;
+};
+
+const getImageUrls = async (folderPath) => {
+  const listRef = ref(storage, folderPath);
+  try {
+    const result = await listAll(listRef);
+    const urlPromises = result.items.map((itemRef) => getDownloadURL(itemRef));
+    const urls = await Promise.all(urlPromises);
+    return urls;
+  } catch (error) {
+    console.error("Error fetching image URLs: ", error);
+    return [];
+  }
 };
 
 export {
@@ -41,9 +55,9 @@ export {
   setDoc,
   addDoc,
   doc,
-  docId,
   deleteDoc,
   updateDoc,
   query,
   getProjects,
+  getImageUrls,
 };

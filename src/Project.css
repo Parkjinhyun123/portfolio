@@ -24,8 +24,15 @@
   justify-content: space-between;
 }
 
+.introduce {
+  margin: 20px 0;
+  font-size: 32px;
+  font-weight: bold;
+}
+
 @media (max-width: 1024px) {
-  .ProjectCard-container {
-    flex-wrap: nowrap;
+  .ProjectCard-content {
+    flex-direction: column;
+    gap: 30px;
   }
 }

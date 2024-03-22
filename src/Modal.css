@@ -1,0 +1,79 @@
+.Modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 200;
+  padding: 16px;
+}
+
+.Close-btn {
+  position: absolute;
+  right: 3%;
+  top: 5%;
+  font-size: 32px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.Modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.ModalCardImg img {
+  width: 100%;
+  height: 500px;
+}
+
+.ModalCard-title {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.ModalCard-title div {
+  margin-left: 5px;
+}
+
+.Modal-left a {
+  text-decoration: none;
+  color: #000;
+}
+
+.Modal-left,
+.Modal-right {
+  width: 45%;
+  margin: 15px 5px;
+}
+.Stacks {
+  background-color: #c2c2c2;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 12px;
+  text-align: center;
+  width: 40px;
+}
+
+@media (min-width: 1024px) {
+  .Modal-content {
+    width: 50%;
+  }
+
+  .Modal-left,
+  .Modal-right {
+    width: 48%;
+  }
+}

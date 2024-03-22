@@ -4,6 +4,8 @@ import Banner from "./Banner";
 import About from "./About";
 import Skills from "./Skills";
 import Project from "./Project";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function App() {
   return (
