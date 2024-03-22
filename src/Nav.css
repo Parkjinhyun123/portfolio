@@ -1,0 +1,42 @@
+.Nav-Container {
+  width: 100%;
+  min-height: 80px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  backdrop-filter: blur(40px);
+  position: fixed;
+  top: 0;
+  box-shadow: 3px 0 8px 0 rgba(155, 155, 155, 0.4);
+  z-index: 100;
+}
+
+.Logo {
+  cursor: pointer;
+  font-size: 32px;
+  font-weight: bold;
+  margin-left: 30px;
+  color: #fff;
+}
+
+.Logo:hover {
+  color: #555;
+}
+
+.Nav-menu {
+  display: flex;
+  gap: 30px;
+}
+
+.Nav-menu li {
+  list-style: none;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #fff;
+}
+
+.Nav-menu li:hover {
+  color: #555;
+}

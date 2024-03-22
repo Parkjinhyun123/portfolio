@@ -1,0 +1,30 @@
+.ProjectCard {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  box-shadow: 3px 8px 8px rgba(155, 155, 155, 0.5);
+  padding: 16px;
+  border-radius: 16px;
+  background-color: #fff;
+  margin: 0 30px;
+  justify-content: space-between;
+}
+
+.ProjectCard img {
+  width: 100%;
+  height: 200px;
+}
+
+.Card-title {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.Card-title div {
+  margin-left: 5px;
+}
+
+.Card-intro {
+  margin: 10px 0;
+}

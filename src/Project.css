@@ -1,0 +1,31 @@
+.ProjectCard-container {
+  background: linear-gradient(to left, #c9c1f4, #d8b3e7);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+
+.ProjectCard-head {
+  font-size: 32px;
+  font-weight: bold;
+  border-bottom: 1px solid #555;
+  border-bottom-width: 100%;
+  margin-bottom: 20px;
+  padding: 8px;
+  width: 120px;
+}
+
+.ProjectCard-content {
+  display: flex;
+  overflow-x: auto;
+  justify-content: space-between;
+}
+
+@media (max-width: 1024px) {
+  .ProjectCard-container {
+    flex-wrap: nowrap;
+  }
+}
