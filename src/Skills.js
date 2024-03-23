@@ -39,7 +39,7 @@ function Skills() {
       <div className="Skill-card-container">
         {[
           { name: "Front End", img: FrontImg },
-          { name: "Backend", img: BackImg },
+          { name: "Back End", img: BackImg },
           { name: "Version Control", img: GitImg },
           { name: "Communication", img: FigmaImg },
         ].map((skill, index) => (
