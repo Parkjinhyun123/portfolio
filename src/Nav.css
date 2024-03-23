@@ -6,7 +6,7 @@
   justify-content: space-around;
   align-items: center;
   backdrop-filter: blur(40px);
-  position: absolute;
+  position: fixed;
   top: 0;
   box-shadow: 3px 0 8px 0 rgba(155, 155, 155, 0.4);
   z-index: 100;
