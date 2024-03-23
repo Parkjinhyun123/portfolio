@@ -21,6 +21,7 @@
 .ProjectCard-content {
   display: flex;
   overflow-x: auto;
+  margin: 0 auto;
   justify-content: space-between;
 }
 
