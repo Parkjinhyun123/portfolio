@@ -34,5 +34,8 @@
   .Card-container {
     justify-content: center;
     align-items: center;
+    width: 500px;
+    gap: 8px;
+    margin: 0 auto;
   }
 }
