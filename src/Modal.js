@@ -6,19 +6,18 @@ import { getImageUrls } from "./api/firebase";
 const Modal = ({ isOpen, onClose, project }) => {
   const [imageUrls, setImageUrls] = useState([]);
   const folderPath = project?.Title;
+
   useEffect(() => {
     if (!isOpen) {
       return;
     }
     const fetchImageUrls = async () => {
-      const folderPath = project.Title;
       const urls = await getImageUrls(folderPath);
       setImageUrls(urls);
     };
 
     fetchImageUrls();
   }, [isOpen, project]);
-  if (!isOpen) return null;
 
   const settings = {
     dots: true,
@@ -27,7 +26,7 @@ const Modal = ({ isOpen, onClose, project }) => {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-
+  if (!isOpen) return null;
   return (
     <div className="Modal-overlay" onClick={onClose}>
       <div className="Modal-content" onClick={(e) => e.stopPropagation()}>
@@ -64,10 +63,11 @@ const Modal = ({ isOpen, onClose, project }) => {
           <br />
           <br />
           <br />
-
           <h4>후기</h4>
           <br />
-          <div className="ModalCard-intro">{project.review}</div>
+          <div className="ModalCard-intro">{project.review1}</div>
+          <br />
+          <div className="ModalCard-intro">{project.review2}</div>
         </div>
         <div className="Modal-bottom">
           <div className="Stacks">Stack</div>

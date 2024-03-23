@@ -20,7 +20,7 @@ function Banner() {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      <div>
+      <div className="Intro-container">
         <div className="Intro" ref={introRef}>
           사람을 위해 개발하는
           <br />

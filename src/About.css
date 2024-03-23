@@ -29,3 +29,10 @@
   padding: 16px;
   margin: 0 50px;
 }
+
+@media (max-width: 764px) {
+  .Card-container {
+    justify-content: center;
+    align-items: center;
+  }
+}

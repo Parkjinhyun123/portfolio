@@ -3,6 +3,7 @@ import "./Nav.css";
 
 function Nav() {
   const [scrollDown, setScrollDown] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -13,6 +14,10 @@ function Nav() {
     if (section) {
       section.scrollIntoView({ behavior: "smooth" });
     }
+  };
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
 
   useEffect(() => {
@@ -37,12 +42,19 @@ function Nav() {
       <div className="Logo" onClick={scrollToTop}>
         JH' Portfolio
       </div>
-      <div className="Menu-container">
+      <div className="Hamburger" onClick={toggleMenu}>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div className={`Menu-container ${isMenuOpen ? "open" : ""}`}>
+        {" "}
         <ul className="Nav-menu">
           <li onClick={() => scrollToSection("about")}>About</li>
           <li onClick={() => scrollToSection("skills")}>Skills</li>
           <li onClick={() => scrollToSection("project")}>Project</li>
-          <li>Contact</li>
+          <li onClick={() => scrollToSection("contact")}>Contact</li>
         </ul>
       </div>
     </div>

@@ -32,3 +32,13 @@
   color: #fff;
   margin-top: 50px;
 }
+
+@media (max-width: 764px) {
+  .BannerContainer {
+    height: 50vh;
+  }
+  .Intro {
+    font-size: 60px;
+    -webkit-text-stroke: 2px #fff;
+  }
+}

@@ -6,6 +6,7 @@ import Skills from "./Skills";
 import Project from "./Project";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Contact from "./Contact";
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
       </div>
       <div id="project">
         <Project />
+      </div>
+      <div id="contact">
+        <Contact />
       </div>
     </div>
   );

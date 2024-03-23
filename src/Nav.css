@@ -40,3 +40,61 @@
 .Nav-menu li:hover {
   color: #555;
 }
+
+.Menu-container.open {
+  display: block;
+}
+
+@media (max-width: 764px) {
+  .Nav-Container {
+    justify-content: space-between;
+  }
+
+  .Menu-container {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    z-index: 1000;
+  }
+
+  .Hamburger {
+    display: block;
+    position: relative;
+    transition: 0.3s ease-in-out;
+    width: 45px;
+    height: 34px;
+    cursor: pointer;
+  }
+
+  .Hamburger span {
+    position: absolute;
+    height: 8px;
+    border-radius: 4px;
+    width: 100%;
+    background: #fff;
+    top: 0;
+    transition: 0.2s;
+  }
+
+  .Hamburger span:nth-child(2),
+  .Hamburger span:nth-child(3) {
+    top: 13px;
+  }
+
+  .Hamburger span:nth-child(4) {
+    top: 26px;
+  }
+
+  .Nav-menu {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .Nav-menu li {
+    padding: 10px 20px;
+  }
+}
