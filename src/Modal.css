@@ -33,6 +33,7 @@
   /* flex-direction: column; */
   flex-wrap: wrap;
   position: relative;
+  overflow: hidden;
 }
 
 .ModalCardImg img {
