@@ -44,6 +44,7 @@ textarea {
   border-radius: 16px 16px 16px 16px;
   box-shadow: 3px 8px 8px rgba(155, 155, 155, 0.5);
   cursor: pointer;
+  color: #000;
 }
 
 .Send-btn:active {
