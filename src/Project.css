@@ -1,5 +1,6 @@
 .ProjectCard-container {
   background: linear-gradient(to left, #c9c1f4, #d8b3e7);
+  height: 100%;
   padding: 32px;
   display: flex;
   flex-direction: column;
@@ -21,8 +22,9 @@
 .ProjectCard-content {
   display: flex;
   overflow-x: auto;
-  margin: 0 auto;
+  margin: 20px auto;
   justify-content: space-between;
+  padding: 32px;
 }
 
 .introduce {

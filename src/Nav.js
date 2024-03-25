@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./Nav.css";
+import { motion, useScroll } from "framer-motion";
 
 function Nav() {
   const [scrollDown, setScrollDown] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { scrollYProgress } = useScroll();
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -57,6 +59,7 @@ function Nav() {
           <li onClick={() => scrollToSection("contact")}>Contact</li>
         </ul>
       </div>
+      <motion.div className="bar" style={{ scaleX: scrollYProgress }} />
     </div>
   );
 }

@@ -45,6 +45,17 @@
   display: block;
 }
 
+.bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(to left, #c9c1f4, #d8b3e7);
+  transform-origin: 0 100%;
+  transition: all 0.3s ease;
+}
+
 @media (max-width: 764px) {
   .Nav-Container {
     justify-content: space-between;

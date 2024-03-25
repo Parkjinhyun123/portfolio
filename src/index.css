@@ -1,5 +1,14 @@
+@font-face {
+  font-family: "Noto Sans KR";
+  src: url("./font/NotoSansKR-VariableFont_wght.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 html,
 body {
   width: 100%;
   overflow-x: hidden;
+  /* font-family: "Noto Sans KR", sans-serif; */
+  word-break: keep-all;
 }

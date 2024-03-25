@@ -2,10 +2,13 @@ import { useEffect, useState } from "react";
 import { getProjects } from "./api/firebase";
 import "./ProjectCard.css";
 import Modal from "./Modal";
+import ProjectCardItem from "./ProjectCardItem";
+import classNames from "classnames";
 
 function ProjectCard() {
   const [projects, setProjects] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isActive, setIsActive] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
 
   useEffect(() => {
@@ -17,36 +20,47 @@ function ProjectCard() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (isModalOpen) {
+      setTimeout(() => {
+        setIsActive(true);
+      }, 100);
+    } else {
+      setIsActive(false);
+    }
+  }, [isModalOpen]);
+
   const toggleModal = (project) => {
-    setIsModalOpen(!isModalOpen);
-    setSelectedProject(isModalOpen ? null : project);
+    if (!isModalOpen) {
+      setSelectedProject(project);
+      setIsModalOpen(true);
+    } else {
+      setIsModalOpen(false);
+      setTimeout(() => {
+        setSelectedProject(null);
+      }, 100);
+    }
   };
 
   return (
     <>
       {projects.map((project) => (
-        <div
+        <ProjectCardItem
           key={project.id}
-          className="ProjectCard"
+          project={project}
           onClick={() => toggleModal(project)}
-        >
-          <div className="CardImg">
-            <img src={project.img} alt={project.Title} />
-          </div>
-          <div className="Card-title">
-            <h3>{project.Title}</h3>
-            <div>{project.Member}</div>
-          </div>
-          <div className="Card-intro">{project.Intro}</div>
-          <div className="Stacks">Stack</div>
-          <div>{project.Skills}</div>
-        </div>
+        />
       ))}
-      <Modal
-        isOpen={isModalOpen}
-        onClose={() => toggleModal(null)}
-        project={selectedProject}
-      />
+      <div
+        className={classNames("Modal-overlay", { active: isActive })}
+        style={{ display: isModalOpen ? "flex" : "none" }}
+      >
+        <Modal
+          isOpen={isModalOpen}
+          onClose={() => toggleModal(null)}
+          project={selectedProject}
+        />
+      </div>
     </>
   );
 }
