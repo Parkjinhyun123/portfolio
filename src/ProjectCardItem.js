@@ -15,6 +15,12 @@ const HiddenContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media (max-width: 1024px) {
+    bottom: initial;
+    transition: none;
+    position: static;
+  }
 `;
 
 const Card = styled.div`
@@ -41,6 +47,9 @@ const Card = styled.div`
   }
   &:hover ${HiddenContent} {
     bottom: 0;
+  }
+  @media (max-width: 1024px) {
+    height: auto;
   }
 `;
 
