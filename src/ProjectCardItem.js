@@ -29,6 +29,7 @@ const Card = styled.div`
   margin: 0 30px;
   justify-content: space-between;
   cursor: pointer;
+  transform: translateX(-50%);
   transform-style: preserve-3d;
   overflow: hidden;
   position: relative;
