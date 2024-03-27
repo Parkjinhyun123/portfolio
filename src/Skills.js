@@ -3,6 +3,7 @@ import FrontImg from "./img/front.png";
 import BackImg from "./img/back.png";
 import GitImg from "./img/Version Control.png";
 import FigmaImg from "./img/Communication.png";
+import DeployImg from "./img/Deploy.png";
 import "./Skills.css";
 
 function Skills() {
@@ -38,6 +39,7 @@ function Skills() {
           { name: "Database", img: BackImg },
           { name: "Version Control", img: GitImg },
           { name: "Design", img: FigmaImg },
+          { name: "Deploy", img: DeployImg },
         ].map((skill, index) => (
           <div
             ref={(el) => (cardRefs.current[index] = el)}
