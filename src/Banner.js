@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import "./Banner.css";
+import ThreeTextComponent from "./ThreeFont";
 
 function Banner() {
   const introRef = useRef(null);
@@ -22,9 +23,7 @@ function Banner() {
     >
       <div className="Intro-container">
         <div className="Intro" ref={introRef}>
-          사람을 위해 개발하는
-          <br />
-          프론트엔드 개발자
+          <ThreeTextComponent />
         </div>
         <div className="About-me">
           <strong>사람</strong>이 어떻게하면 더 편한 생활을 누릴지
