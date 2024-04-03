@@ -2,15 +2,21 @@
   position: relative;
   width: 100%;
   height: 80vh;
-  background-image: url("./img/Banner.jpg");
+  /* background-image: url("./img/Banner.jpg"); */
   background-size: cover;
   background-position: center;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: linear-gradient(to left, #c9c1f4, #d8b3e7);
+}
+
+.Intro-container {
+  width: 100%;
 }
 
 .Intro {
+  width: 100%;
   font-size: 100px;
   font-weight: bold;
   text-align: center;

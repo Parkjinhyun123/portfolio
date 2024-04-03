@@ -1,148 +1,55 @@
-import React, { useEffect, useRef } from "react";
+import React, { Suspense, useEffect, useRef } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
+import { useLoader } from "@react-three/fiber";
+import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
+import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader";
 import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import { SVGLoader } from "three/examples/jsm/loaders/SVGLoader";
-import { FontLoader } from "three/examples/jsm/loaders/FontLoader";
 
 const ThreeTextComponent = () => {
-  const mountRef = useRef(null);
-  const introRef = useRef(null);
+  function Model({ objUrl, mtlUrl }) {
+    const modelRef = useRef();
+    const materials = useLoader(MTLLoader, mtlUrl);
+    const obj = useLoader(OBJLoader, objUrl, (loader) => {
+      materials.preload();
+      loader.setMaterials(materials);
+    });
 
-  useEffect(() => {
-    let camera, scene, renderer;
-
-    function init() {
-      camera = new THREE.PerspectiveCamera(45, 3000 / 1000, 1, 10000);
-      camera.position.set(0, 0, 600);
-
-      scene = new THREE.Scene();
-      scene.background = null;
-
-      const loader = new FontLoader();
-      loader.load("fonts/Do Hyeon_Regular.json", function (font) {
-        const color = new THREE.Color(0xffffff);
-
-        const matDark = new THREE.MeshBasicMaterial({
-          color: color,
-          side: THREE.DoubleSide,
-        });
-
-        const matLite = new THREE.MeshBasicMaterial({
-          color: color,
-          transparent: true,
-          opacity: 0.4,
-          side: THREE.DoubleSide,
-        });
-
-        const message = "   사람을 생각하는 \n 개발자 박진현 입니다.\n";
-
-        const shapes = font.generateShapes(message, 80);
-
-        const geometry = new THREE.ShapeGeometry(shapes);
-
-        geometry.computeBoundingBox();
-
-        const xMid =
-          -0.5 * (geometry.boundingBox.max.x - geometry.boundingBox.min.x);
-
-        geometry.translate(xMid, 0, 0);
-
-        const text = new THREE.Mesh(geometry, matLite);
-        text.position.z = -150;
-        scene.add(text);
-
-        const holeShapes = [];
-        for (let i = 0; i < shapes.length; i++) {
-          const shape = shapes[i];
-          if (shape.holes && shape.holes.length > 0) {
-            for (let j = 0; j < shape.holes.length; j++) {
-              const hole = shape.holes[j];
-              holeShapes.push(hole);
-            }
-          }
-        }
-
-        shapes.push.apply(shapes, holeShapes);
-
-        const style = SVGLoader.getStrokeStyle(5, color.getStyle());
-
-        const strokeText = new THREE.Group();
-
-        for (let i = 0; i < shapes.length; i++) {
-          const shape = shapes[i];
-
-          const points = shape.getPoints();
-
-          const geometry = SVGLoader.pointsToStroke(points, style);
-
-          geometry.translate(xMid, 0, 0);
-
-          const strokeMesh = new THREE.Mesh(geometry, matDark);
-          strokeText.add(strokeMesh);
-        }
-
-        scene.add(strokeText);
-      });
-
-      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-      renderer.setPixelRatio(window.devicePixelRatio);
-      renderer.setSize(2500, 400);
-      if (mountRef.current) {
-        mountRef.current.appendChild(renderer.domElement);
+    useEffect(() => {
+      if (modelRef.current) {
+        modelRef.current.scale.set(0.02, 0.02, 0.02);
+        modelRef.current.position.set(-1.3, -1, 0);
       }
+    }, []);
 
-      const controls = new OrbitControls(camera, renderer.domElement);
-      controls.target.set(0, 0, 0);
-      controls.update();
-
-      window.addEventListener("resize", onWindowResize, false);
-
-      function onWindowResize() {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
+    // 모델 회전
+    useFrame((state, delta) => {
+      if (modelRef.current) {
+        // 10초에 360도 회전을 위한 계산
+        const rotationPerSecond = (2 * Math.PI) / 20;
+        modelRef.current.rotation.y += rotationPerSecond * delta;
       }
+    });
 
-      function animate() {
-        requestAnimationFrame(animate);
-        controls.update();
-        renderer.render(scene, camera);
-      }
+    return <primitive object={obj} ref={modelRef} />;
+  }
 
-      animate();
-    }
-
-    init();
-
-    const handleMouseMove = (e) => {
-      if (introRef.current) {
-        const { top, height } = introRef.current.getBoundingClientRect();
-        const y = e.clientY - top;
-        const yPercent = (y / height) * 100;
-        introRef.current.style.backgroundPosition = `center ${100 - yPercent}%`;
-      }
-    };
-
-    const handleMouseLeave = () => {
-      if (introRef.current) {
-        introRef.current.style.backgroundPosition = "center 100%";
-      }
-    };
-
-    if (introRef.current) {
-      introRef.current.addEventListener("mousemove", handleMouseMove);
-      introRef.current.addEventListener("mouseleave", handleMouseLeave);
-    }
-
-    return () => {
-      if (introRef.current) {
-        introRef.current.removeEventListener("mousemove", handleMouseMove);
-        introRef.current.removeEventListener("mouseleave", handleMouseLeave);
-      }
-    };
-  }, []);
-
-  return <div ref={mountRef} />;
+  return (
+    <Canvas
+      style={{
+        width: "100%",
+        height: "500px",
+      }}
+    >
+      <ambientLight intensity={5} />
+      <spotLight position={[10, 10, 10]} angle={0.3} penumbra={1} />
+      <pointLight position={[-10, -10, -10]} intensity={5} />
+      <Suspense fallback={null}>
+        <Model objUrl="/Project Name.obj" mtlUrl="/Project Name.mtl" />
+      </Suspense>
+      <OrbitControls />
+    </Canvas>
+  );
 };
 
 export default ThreeTextComponent;
