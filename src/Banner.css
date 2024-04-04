@@ -13,10 +13,11 @@
 
 .Intro-container {
   width: 100%;
+  position: relative;
 }
 
 .Intro {
-  width: 100%;
+  width: 70%;
   font-size: 100px;
   font-weight: bold;
   text-align: center;
@@ -30,6 +31,18 @@
   background-repeat: no-repeat;
   background-size: 100% 200%;
   background-position: center 100%;
+  position: absolute;
+  top: 25%;
+  left: 16%;
+}
+
+.ThreeTextBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* 필요한 경우 추가적인 스타일 조정 */
 }
 
 .About-me {
@@ -40,6 +53,10 @@
 }
 
 @media (max-width: 764px) {
+  canvas {
+    height: 300px;
+  }
+
   .BannerContainer {
     height: 50vh;
   }
@@ -50,5 +67,9 @@
   }
   .About-me {
     font-size: 12px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20%;
   }
 }
