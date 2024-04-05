@@ -1,15 +1,15 @@
-newmtl Tulip 1
+newmtl Chrome Satin
 Kd 0.910 0.165 0.200
 d 1.000
-newmtl Tulip
+newmtl Chrome Satin 1
 Kd 0.910 0.165 0.200
 d 1.000
-newmtl Tulip 4
+newmtl Chrome Satin 2
 Kd 0.910 0.165 0.200
 d 1.000
-newmtl Tulip 2
+newmtl Chrome Satin 3
 Kd 0.910 0.165 0.200
 d 1.000
-newmtl Tulip 3
+newmtl Chrome Satin 4
 Kd 0.910 0.165 0.200
 d 1.000

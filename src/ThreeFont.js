@@ -1,87 +1,89 @@
 import React, { Suspense, useEffect, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
-import { useLoader } from "@react-three/fiber";
-import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
-import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader";
-import * as THREE from "three";
+import { useGLTF, OrbitControls, Effects } from "@react-three/drei";
+import { Bloom, EffectComposer } from "@react-three/postprocessing";
+import { MeshStandardMaterial } from "three"; // MeshStandardMaterial import 추가
 import { sRGBEncoding } from "@react-three/drei/helpers/deprecated";
 
 const ThreeTextComponent = () => {
-  // 화면의 너비를 상태로 관리
   const [width, setWidth] = useState(window.innerWidth);
 
-  function Model({ objUrl, mtlUrl }) {
+  function Model({ glbUrl }) {
     const modelRef = useRef();
-    const materials = useLoader(MTLLoader, mtlUrl);
-    const obj = useLoader(OBJLoader, objUrl, (loader) => {
-      materials.preload();
-      loader.setMaterials(materials);
-    });
+    const { scene } = useGLTF(glbUrl); // .glb 파일 로드
+
+    // 모델 크기 및 위치 조정
     useEffect(() => {
       if (modelRef.current) {
-        // 화면 너비에 따라 모델의 스케일 조정
         const scale = width <= 764 ? 0.01 : 0.02;
         modelRef.current.scale.set(scale, scale, scale);
-
-        // 화면 너비에 따라 모델의 위치 조정
-        // 예를 들어, 화면 너비가 764px 이하일 경우, 모델을 화면 중앙으로 이동
-        const positionX = width <= 764 ? 0 : -1.3; // 화면 너비에 따라 X 위치 조정
-        const positionY = width <= 764 ? 0 : -1; // 화면 너비에 따라 Y 위치 조정
-        // Z 위치는 필요에 따라 조정할 수 있습니다.
+        const positionX = width <= 764 ? 0 : -1;
+        const positionY = width <= 764 ? 0 : -2;
         modelRef.current.position.set(positionX, positionY, 0);
       }
-    }, [width]); // 화면 너비가 변경될 때마다 이펙트를 다시 실행
+    }, [width]);
 
-    useEffect(() => {
-      modelRef.current.traverse((child) => {
-        if (child.isMesh) {
-          child.material = new THREE.MeshStandardMaterial({
-            color: 0xe92934,
-            metalness: 0.1,
-            roughness: 0.1,
-          });
-        }
-      });
-    }, [obj]);
-
+    // 모델 회전
     useFrame((state, delta) => {
       if (modelRef.current) {
-        const rotationPerSecond = (2 * Math.PI) / 20;
+        const rotationPerSecond = (2 * Math.PI) / 20; // 20초에 한 바퀴 회전
         modelRef.current.rotation.y += rotationPerSecond * delta;
       }
     });
 
-    return <primitive object={obj} ref={modelRef} />;
+    // Chrome Satin 재질로 변경
+    useEffect(() => {
+      modelRef.current.traverse((child) => {
+        if (child.isMesh) {
+          child.material = new MeshStandardMaterial({
+            color: 0xe82a33, // Chrome은 일반적으로 밝은 색을 가집니다.
+            metalness: 0.9, // 높은 금속성을 가집니다.
+            roughness: 0.2, // 낮은 거칠기를 가집니다. Satin 마감은 약간의 거칠기가 있기 때문에 0에 가깝지만 완전히 0은 아닙니다.
+            envMapIntensity: 1.5, // 환경 맵의 강도를 조정하여 반사 효과를 강조합니다. (환경 맵 사용하지 않을 경우 이 속성은 무시됩니다)
+          });
+        }
+      });
+    }, [glbUrl]); // glbUrl이 변경될 때마다 실행
+
+    return <primitive object={scene} ref={modelRef} />;
   }
 
   useEffect(() => {
-    // 화면 크기가 변경될 때 너비를 업데이트하는 이벤트 리스너
     function handleResize() {
       setWidth(window.innerWidth);
     }
 
     window.addEventListener("resize", handleResize);
-
-    // 컴포넌트가 언마운트될 때 이벤트 리스너 제거
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
     <Canvas
-      gl={{ antialias: true, outputEncoding: sRGBEncoding }}
+      gl={{
+        antialias: true,
+        outputEncoding: sRGBEncoding,
+      }}
       style={{
         width: "100%",
         height: "500px",
       }}
     >
-      <ambientLight intensity={3} />
-      <spotLight position={[10, 10, 10]} angle={0.3} penumbra={1} />
-      <pointLight position={[-10, -10, -10]} intensity={3} />
+      <ambientLight intensity={1} />
+      <directionalLight position={[-1, 1, 5]} intensity={4} />
+      <pointLight position={[-10, -5, -10]} intensity={2} color={"#ffffff"} />
       <Suspense fallback={null}>
-        <Model objUrl="/Project Name.obj" mtlUrl="/Project Name.mtl" />
+        <Model glbUrl="/Project Name.glb" />
       </Suspense>
       <OrbitControls />
+      <Effects>
+        <EffectComposer>
+          <Bloom
+            luminanceThreshold={0.3}
+            luminanceSmoothing={0.9}
+            height={300}
+          />
+        </EffectComposer>
+      </Effects>
     </Canvas>
   );
 };
