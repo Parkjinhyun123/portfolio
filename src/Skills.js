@@ -33,6 +33,7 @@ function Skills() {
 
   return (
     <div className="Skill-container">
+      <div className="About-head">Skills</div>
       <div className="Skill-card-container">
         {[
           { name: "Front End", img: FrontImg },
@@ -46,7 +47,7 @@ function Skills() {
             className="Skill-card"
             key={skill.name}
           >
-            <div className="Skill-name">{skill.name}</div>
+            <h3 className="Skill-name">{skill.name}</h3>
             <img src={skill.img} alt={`${skill.name} 스킬`} />
           </div>
         ))}

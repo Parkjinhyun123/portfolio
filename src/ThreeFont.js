@@ -18,7 +18,7 @@ const ThreeTextComponent = () => {
         const scale = width <= 764 ? 0.01 : 0.02;
         modelRef.current.scale.set(scale, scale, scale);
         const positionX = width <= 764 ? 0 : -1;
-        const positionY = width <= 764 ? 0 : -2;
+        const positionY = width <= 764 ? -1 : -2;
         modelRef.current.position.set(positionX, positionY, 0);
       }
     }, [width]);
@@ -26,7 +26,7 @@ const ThreeTextComponent = () => {
     // 모델 회전
     useFrame((state, delta) => {
       if (modelRef.current) {
-        const rotationPerSecond = (2 * Math.PI) / 20; // 20초에 한 바퀴 회전
+        const rotationPerSecond = (2 * Math.PI) / 20;
         modelRef.current.rotation.y += rotationPerSecond * delta;
       }
     });
@@ -36,14 +36,14 @@ const ThreeTextComponent = () => {
       modelRef.current.traverse((child) => {
         if (child.isMesh) {
           child.material = new MeshStandardMaterial({
-            color: 0xe82a33, // Chrome은 일반적으로 밝은 색을 가집니다.
-            metalness: 0.9, // 높은 금속성을 가집니다.
-            roughness: 0.2, // 낮은 거칠기를 가집니다. Satin 마감은 약간의 거칠기가 있기 때문에 0에 가깝지만 완전히 0은 아닙니다.
-            envMapIntensity: 1.5, // 환경 맵의 강도를 조정하여 반사 효과를 강조합니다. (환경 맵 사용하지 않을 경우 이 속성은 무시됩니다)
+            color: 0xe82a33,
+            metalness: 0.9,
+            roughness: 0.2,
+            envMapIntensity: 1.5,
           });
         }
       });
-    }, [glbUrl]); // glbUrl이 변경될 때마다 실행
+    }, [glbUrl]);
 
     return <primitive object={scene} ref={modelRef} />;
   }

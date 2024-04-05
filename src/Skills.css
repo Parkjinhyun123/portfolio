@@ -38,11 +38,6 @@
   transform: scale(1.1);
 }
 
-.Skill-name {
-  font-size: 16px;
-  font-weight: 800;
-}
-
 .Skill-card img {
   display: block;
   max-width: 100%;

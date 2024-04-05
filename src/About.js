@@ -5,7 +5,7 @@ function About() {
   return (
     <>
       <div className="About-container">
-        <div className="About-head">ABOUT ME</div>
+        <div className="About-head">ABOUT</div>
         <div className="About">
           <div className="Card-container">
             <Card icon="user" name="Name" content="박진현" />
