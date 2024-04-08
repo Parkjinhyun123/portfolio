@@ -7,6 +7,7 @@ import Project from "./Project";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Contact from "./Contact";
+import { Analytics } from "@vercel/analytics/react";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
       <div id="contact">
         <Contact />
       </div>
+      <Analytics />
     </div>
   );
 }
