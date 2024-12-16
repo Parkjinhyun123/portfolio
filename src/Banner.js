@@ -24,7 +24,9 @@ function Banner() {
     >
       <div className="Intro-container">
         {/* ThreeTextComponent를 배경처럼 겹쳐서 보이게 합니다. */}
-        <ThreeTextComponent className="ThreeTextBackground" />
+        <ThreeTextComponent
+          className="ThreeTextBackground"
+        />
         <div className="Intro" ref={introRef}>
           사람을 위해 개발하는
           <br />

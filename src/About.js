@@ -13,6 +13,11 @@ function About() {
             <Card icon="envelope" name="E-Mail" content="pjh1454@naver.com" />
             <Card icon="calendar" name="Birth" content="97.12.09" />
             <Card icon="pencil" name="DW Academy" content="23.08~24.02" />
+            <Card
+              icon="pencil"
+              name="고려사이버대학교 소프트웨어 공학과"
+              content="24.08~"
+            />
           </div>
         </div>
       </div>

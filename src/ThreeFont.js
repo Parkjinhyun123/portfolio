@@ -66,6 +66,8 @@ const ThreeTextComponent = () => {
       style={{
         width: "100%",
         height: "500px",
+        userselect: "none",
+        pointEvents: "none"
       }}
     >
       <ambientLight intensity={1} />
